@@ -74,7 +74,7 @@ const Services = () => {
   return (
     <div
       id="services"
-      className={`w-full h-screen py-16 px-8 flex flex-col items-center relative ${isDark ? "bg-gray-800" : "bg-amber-500"}`}
+      className={`w-full min-h-screen py-16 px-8 flex flex-col items-center relative ${isDark ? "bg-gray-800" : "bg-amber-500"}`}
     >
       <div className="h-[70px]"></div>
 

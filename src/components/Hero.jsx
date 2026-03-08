@@ -15,7 +15,7 @@ const Hero = () => {
   const isDark = useSelector((state) => state.darkMode.value);
 
   return (
-    <div id="hero" className={`w-full h-screen flex flex-col ${isDark ? "bg-gray-900" : "bg-white"}`}>
+    <div id="hero" className={`w-full min-h-screen flex flex-col ${isDark ? "bg-gray-900" : "bg-white"}`}>
       <div className="h-[120px]"></div>
       <div className="relative flex items-center justify-around w-full h-50">
         <div className="flex justify-center items-center absolute z-2">

@@ -38,7 +38,7 @@ const Skills = () => {
   return (
     <div
       id="skills"
-      className={`w-full h-screen px-8 py-16 flex flex-col items-center relative ${isDark ? "bg-gray-900 text-white" : "bg-amber-50 text-black"}`}
+      className={`w-full min-h-screen px-8 py-16 flex flex-col items-center relative ${isDark ? "bg-gray-900 text-white" : "bg-amber-50 text-black"}`}
     >
       <div className="h-[70px]"></div>
 

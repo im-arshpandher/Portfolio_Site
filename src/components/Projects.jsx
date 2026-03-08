@@ -23,7 +23,7 @@ const Projects = () => {
   return (
     <div
       id="projects"
-      className={`relative w-full h-screen overflow-hidden p-6 ${isDark ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`}
+      className={`relative w-full h-screen overflow-hidden p-6 ${isDark ? "bg-gray-900 text-white" : "bg-amber-50 text-black"}`}
     >
       <div className="h-[70px] md:h-[70px]"></div>
       <h1 className={`text-4xl font-bold mb-8 text-center ${isDark ? "text-white" : "text-black"}`}>Projects</h1>

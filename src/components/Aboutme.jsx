@@ -8,7 +8,7 @@ const AboutMe = () => {
   return (
     <div
       id="about"
-      className={`w-full h-screen px-8 py-16 flex flex-col md:flex-row items-center justify-center gap-10 relative ${isDark ? "bg-gray-900 text-white" : "bg-white !text-black"}`}
+      className={`w-full min-h-screen px-8 py-16 flex flex-col md:flex-row items-center justify-center gap-10 relative ${isDark ? "bg-gray-900 text-white" : "bg-white !text-black"}`}
     >
       {/* Profile Image */}
       <div className="w-40 flex items-center justify-center rounded-full overflow-hidden">
