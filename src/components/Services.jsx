@@ -1,7 +1,14 @@
 import React from "react";
-import { Link } from "react-scroll";
 import { motion } from "framer-motion";
-import { FaCode, FaMobileAlt, FaPaintBrush } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import {
+  FaCode,
+  FaMobileAlt,
+  FaPaintBrush,
+  FaServer,
+  FaDatabase,
+  FaGitAlt,
+} from "react-icons/fa";
 
 const services = [
   {
@@ -22,102 +29,92 @@ const services = [
     description:
       "Designing beautiful, intuitive interfaces that enhance user experience and keep visitors engaged.",
   },
+  {
+    title: "Backend Development",
+    icon: <FaServer size={30} />,
+    description:
+      "Building robust server-side applications and REST APIs using Node.js and Express.js.",
+  },
+  {
+    title: "Database Management",
+    icon: <FaDatabase size={30} />,
+    description:
+      "Designing and managing efficient databases using MongoDB for scalable and reliable data storage.",
+  },
+  {
+    title: "Version Control",
+    icon: <FaGitAlt size={30} />,
+    description:
+      "Managing codebases efficiently using Git and GitHub for clean, collaborative, and trackable development.",
+  },
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
 const Services = () => {
+  const isDark = useSelector((state) => state.darkMode.value);
+
   return (
     <div
       id="services"
-      className="w-full min-h-screen py-16 px-8 flex flex-col items-center relative bg-amber-500"
+      className={`w-full h-screen py-16 px-8 flex flex-col items-center relative ${isDark ? "bg-gray-800" : "bg-amber-500"}`}
     >
-      <Link
-        to="skills"
-        smooth={true}
-        duration={500}
-        offset={0}
-        className="hidden md:flex cursor-pointer"
+      <div className="h-[70px]"></div>
+
+      <motion.h2
+        className={`text-4xl font-bold mb-12 ${isDark ? "text-white" : "!text-black"}`}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
       >
-        {" "}
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-          className="absolute w-15 h-15 hover:bg-white top-20 left-[calc(50%-2rem)] rounded-full flex items-center justify-center z-10 bg-amber-500 transform rotate-180"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="#000000"
-          >
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g
-              id="SVGRepo_tracerCarrier"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></g>
-            <g id="SVGRepo_iconCarrier">
-              {" "}
-              <g>
-                {" "}
-                <path fill="none" d="M0 0h24v24H0z"></path>{" "}
-                <path d="M12 15l-4.243-4.243 1.415-1.414L12 12.172l2.828-2.829 1.415 1.414z"></path>{" "}
-              </g>{" "}
-            </g>
-          </svg>
-        </motion.div>
-      </Link>
-      <Link
-        to="projects"
-        smooth={true}
-        duration={500}
-        offset={0}
-        className="hidden md:flex cursor-pointer"
+        My Services
+      </motion.h2>
+
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl w-full"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
       >
-        {" "}
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-          className="absolute w-15 h-15 hover:bg-white top-160 left-[calc(50%-2rem)] rounded-full flex items-center justify-center z-10 bg-amber-500"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="#000000"
-          >
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g
-              id="SVGRepo_tracerCarrier"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></g>
-            <g id="SVGRepo_iconCarrier">
-              {" "}
-              <g>
-                {" "}
-                <path fill="none" d="M0 0h24v24H0z"></path>{" "}
-                <path d="M12 15l-4.243-4.243 1.415-1.414L12 12.172l2.828-2.829 1.415 1.414z"></path>{" "}
-              </g>{" "}
-            </g>
-          </svg>
-        </motion.div>
-      </Link>
-      <div className="h-[120px]"></div>
-      <h2 className="text-4xl font-bold mb-12 !text-black">My Services</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl w-full">
         {services.map((service, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
-            viewport={{ once: true }}
-            className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 text-center flex flex-col items-center mt-8"
+            variants={cardVariants}
+            whileHover={{ y: -6, scale: 1.03 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className={`p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 text-center flex flex-col items-center ${
+              isDark ? "bg-gray-900" : "bg-white"
+            }`}
           >
             <div className="text-amber-500 mb-4">{service.icon}</div>
-            <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-            <p className="text-gray-600">{service.description}</p>
+            <h3 className={`text-xl font-semibold mb-2 ${isDark ? "text-white" : "text-black"}`}>
+              {service.title}
+            </h3>
+            <p className={isDark ? "text-gray-400" : "text-gray-600"}>
+              {service.description}
+            </p>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

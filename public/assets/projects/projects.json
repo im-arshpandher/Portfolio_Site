@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "project_name": "Hianime Clone",
+    "project_images": [
+      "/assets/projects/HianimeClone/Hianime1.png",
+      "/assets/projects/HianimeClone/Hianime2.png",
+      "/assets/projects/HianimeClone/Hianime3.png"
+    ],
+    "project_description": "A full-stack anime streaming website clone inspired by Hianime. It features genre filtering, episode streaming, and anime details using the Jikan API.",
+    "project_start": "2025-01-10",
+    "project_end": "2025-04-20"
+  },
+  {
+    "id": 2,
+    "project_name": "Movie Recommendation System",
+    "project_images": [
+      "/assets/projects/MovieRecommendation/movie1.png",
+      "/assets/projects/MovieRecommendation/movie2.png",
+      "/assets/projects/MovieRecommendation/movie3.png"
+    ],
+    "project_description": "A content-based movie recommendation system built with Python and machine learning techniques, providing similar movie suggestions based on user preferences.",
+    "project_start": "2024-11-01",
+    "project_end": "2025-01-15"
+  }
+]
