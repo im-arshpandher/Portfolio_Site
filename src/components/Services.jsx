@@ -3,11 +3,11 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import {
   FaCode,
-  FaMobileAlt,
   FaPaintBrush,
   FaServer,
   FaDatabase,
-  FaGitAlt,
+  FaLayerGroup,
+  FaShieldAlt,
 } from "react-icons/fa";
 
 const services = [
@@ -16,12 +16,6 @@ const services = [
     icon: <FaCode size={30} />,
     description:
       "Creating fast, responsive, and accessible websites using modern technologies like React and Tailwind CSS.",
-  },
-  {
-    title: "Mobile-Friendly Design",
-    icon: <FaMobileAlt size={30} />,
-    description:
-      "Ensuring every website looks great and functions perfectly on all devices, from phones to desktops.",
   },
   {
     title: "UI/UX Design",
@@ -42,10 +36,16 @@ const services = [
       "Designing and managing efficient databases using MongoDB for scalable and reliable data storage.",
   },
   {
-    title: "Version Control",
-    icon: <FaGitAlt size={30} />,
+    title: "Full Stack Web Apps",
+    icon: <FaLayerGroup size={30} />,
     description:
-      "Managing codebases efficiently using Git and GitHub for clean, collaborative, and trackable development.",
+      "Developing end-to-end web applications with seamless integration between frontend, backend, and database layers.",
+  },
+  {
+    title: "Authentication & Security",
+    icon: <FaShieldAlt size={30} />,
+    description:
+      "Implementing secure user authentication and authorization using JWT, OAuth, and best security practices.",
   },
 ];
 
@@ -85,7 +85,7 @@ const Services = () => {
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
-        My Services
+        Services We Currently Offer!
       </motion.h2>
 
       <motion.div

@@ -5,7 +5,8 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-import Mainpage from "./Mainpage";
+import Mainpage from "./Pages/Mainpage";
+import Contactus from "./Pages/Contactus";
 import { useEffect, useState } from "react";
 import { AiOutlineArrowUp } from "react-icons/ai";
 import { useDispatch } from "react-redux";
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Mainpage />,
+  },
+  {
+    path: "/contact",
+    element: <Contactus />,
   },
 ]);
 
