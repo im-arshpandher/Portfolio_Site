@@ -27,9 +27,8 @@ const socials = [
 const Footer = () => {
   const isDark = useSelector((state) => state.darkMode.value);
 
-   const location = useLocation();
+  const location = useLocation();
   const isHome = location.pathname === "/";
-  const isContact = location.pathname === "/contact";
 
   const scrollToSection = (to) => {
     const section = document.getElementById(to);
@@ -58,25 +57,27 @@ const Footer = () => {
         </motion.div>
 
         {/* Nav Links */}
-       {isHome && <motion.div
-          className="flex flex-wrap justify-center gap-6"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          viewport={{ once: true }}
-        >
-          {footerLinks.map((link) => (
-            <span
-              key={link.to}
-              onClick={() => scrollToSection(link.to)}
-              className={`cursor-pointer text-sm font-semibold hover:underline transition duration-200 ${
-                isDark ? "text-gray-300" : "text-black"
-              }`}
-            >
-              {link.label}
-            </span>
-          ))}
-        </motion.div>}
+        {isHome && (
+          <motion.div
+            className="flex flex-wrap justify-center gap-6"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            {footerLinks.map((link) => (
+              <span
+                key={link.to}
+                onClick={() => scrollToSection(link.to)}
+                className={`cursor-pointer text-sm font-semibold hover:underline transition duration-200 ${
+                  isDark ? "text-gray-300" : "text-black"
+                }`}
+              >
+                {link.label}
+              </span>
+            ))}
+          </motion.div>
+        )}
 
         {/* Social Icons */}
         <motion.div
@@ -115,7 +116,11 @@ const Footer = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          Made with <FaHeart className={`inline mx-1 ${isDark ? "text-amber-500" : "text-black"}`} size={12} />{" "}
+          Made with{" "}
+          <FaHeart
+            className={`inline mx-1 ${isDark ? "text-amber-500" : "text-black"}`}
+            size={12}
+          />{" "}
           by Arsh Pandher &nbsp;·&nbsp; © {new Date().getFullYear()} All rights
           reserved.
         </motion.p>

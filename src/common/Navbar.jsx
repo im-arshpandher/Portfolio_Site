@@ -94,7 +94,7 @@ const Navbar = () => {
         </motion.div></Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-5">
+        <div className="hidden min-[1056px]:flex items-center gap-5">
           {isHome &&
             navItems.map((item) => (
               <motion.div
@@ -138,7 +138,7 @@ const Navbar = () => {
           {isHome && <Link to="/contact" className="py-2">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="bg-amber-500 !py-2 px-2 rounded text-white hover:bg-amber-600"
+                  className="bg-amber-500 !py-2 px-2 rounded text-white hover:bg-amber-600 cursor-pointer"
                 >
                   Contact Us
                 </motion.button>
@@ -160,7 +160,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Icon */}
-        <div className="md:hidden">
+        <div className="min-[1056px]:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
             className={isDark ? "text-white" : "text-gray-800"}
@@ -256,7 +256,7 @@ const Navbar = () => {
              {isHome && <Link to="/contact">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="bg-amber-500 py-2 rounded text-white hover:bg-amber-600"
+                  className="bg-amber-500 py-2 px-2 rounded text-white hover:bg-amber-600 cursor-pointer"
                 >
                   Contact Us
                 </motion.button>

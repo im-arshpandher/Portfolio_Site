@@ -63,7 +63,7 @@ const Skills = () => {
           <motion.div
             key={index}
             variants={skillItemVariants}
-            className={`border cursor-pointer text-center shadow-md rounded-xl px-6 py-6 text-lg font-semibold transition duration-300 flex flex-col items-center gap-2 ${
+            className={`border text-center shadow-md rounded-xl px-6 py-6 text-lg font-semibold transition duration-300 flex flex-col items-center gap-2 ${
               isDark
                 ? "bg-gray-800 border-amber-500 hover:bg-gray-700 text-white"
                 : "bg-white border-amber-300 hover:bg-amber-100 text-black"

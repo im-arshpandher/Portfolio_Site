@@ -84,7 +84,7 @@ const Testimonials = () => {
         What people say about working with me
       </motion.p>
 
-      <div className="w-full max-w-6xl">
+      <div className="w-full max-w-6xl h-60">
         <Swiper
           modules={[Autoplay, Pagination]}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -95,7 +95,7 @@ const Testimonials = () => {
             768: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
-          className="pb-12"
+          className="pb-12 h-full"
         >
           {testimonials.map((t, index) => (
             <SwiperSlide key={index}>
@@ -108,7 +108,7 @@ const Testimonials = () => {
               >
                 <FaQuoteLeft className="text-amber-500" size={24} />
 
-                <p className={`text-sm leading-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}>
+                <p className={`text-sm leading-6 line-clamp-3 !text-justify ${isDark ? "text-gray-300" : "text-gray-600"}`}>
                   {t.message}
                 </p>
 

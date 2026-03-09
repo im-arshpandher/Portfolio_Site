@@ -4,13 +4,12 @@ import Hero from "../components/Hero";
 import Skills from "../components/Skills";
 import AboutMe from "../components/Aboutme";
 import Services from "../components/Services";
-import Projects from "../components/Projects";
 import Testimonials from "../components/Testimonials";
 import Footer from "../common/Footer";
 
 const Mainpage = () => {
   return (
-    <div>
+    <div className="!w-full min-h-screen select-none">
       <Navbar />
       <Hero />
       <Skills/>
