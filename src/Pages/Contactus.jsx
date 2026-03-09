@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import {
@@ -10,10 +10,13 @@ import {
   FaInstagram,
 } from "react-icons/fa";
 import { z } from "zod";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../common/Navbar";
 import Footer from "../common/Footer";
 import { personalInfo } from "../config/personalInfo";
 import { customList } from "country-codes-list";
+import { handleSubmit } from "../logics/handleSubmit";
 
 const countries = Object.entries(
   customList("countryCode", "{countryCallingCode}"),
@@ -41,45 +44,46 @@ const contactSchema = z.object({
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
+const initialForm = {
+  fullName: "",
+  countryCode: "+1",
+  phone: "",
+  email: "",
+  subject: "",
+  reason: "",
+  message: "",
+  honeypot: null,
+};
+
 const Contactus = () => {
   const isDark = useSelector((state) => state.darkMode.value);
 
-  const [form, setForm] = useState({
-    fullName: "",
-    countryCode: "+1",
-    phone: "",
-    email: "",
-    subject: "",
-    reason: "",
-    message: "",
-  });
-
+  const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    // Clear error on change
     if (errors[e.target.name]) {
       setErrors({ ...errors, [e.target.name]: "" });
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const result = contactSchema.safeParse(form);
-    if (!result.success) {
-      const fieldErrors = {};
-      result.error.errors.forEach((err) => {
-        fieldErrors[err.path[0]] = err.message;
-      });
-      setErrors(fieldErrors);
-      return;
-    }
-    setErrors({});
-    setSubmitted(true);
-    console.log(result.data);
+  const onSuccess = () => {
+    toast.success("Message sent successfully! 🎉", {
+      position: "top-right",
+      autoClose: 4000,
+      theme: isDark ? "dark" : "light",
+    });
+    setForm(initialForm);
   };
+
+  const onError = (msg) => {
+  toast.error(msg || "Something went wrong. Please try again.", {
+    position: "top-right",
+    autoClose: 4000,
+    theme: isDark ? "dark" : "light",
+  });
+};
 
   const inputClass = (field) =>
     `w-full px-4 py-2 rounded-lg border outline-none transition duration-200 ${
@@ -100,6 +104,7 @@ const Contactus = () => {
   return (
     <>
       <Navbar />
+      <ToastContainer />
       <div
         id="contact"
         className={`w-full min-h-screen py-16 px-8 flex flex-col items-center ${
@@ -131,7 +136,13 @@ const Contactus = () => {
         <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-10">
           {/* LEFT — Form */}
           <motion.form
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(
+              form,
+              contactSchema,
+              setErrors,
+              onSuccess,
+              onError,
+            )}
             className={`p-8 rounded-2xl shadow-lg flex flex-col gap-5 ${
               isDark
                 ? "bg-gray-800 border border-gray-700"
@@ -142,12 +153,6 @@ const Contactus = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            {submitted && (
-              <div className="bg-green-500/20 border border-green-500 text-green-500 rounded-lg px-4 py-3 text-sm font-semibold">
-                ✅ Message sent successfully!
-              </div>
-            )}
-
             {/* Full Name */}
             <div>
               <label className={labelClass}>Full Name</label>
@@ -209,7 +214,15 @@ const Contactus = () => {
               />
               <ErrorMsg field="email" />
             </div>
-
+              <input
+                type="text"
+                name="honeypot"
+                value={form.honeypot || ""}
+                onChange={handleChange}
+                className="hidden"
+                tabIndex="-1"
+                autoComplete="off"
+              />
             {/* Subject */}
             <div>
               <label className={labelClass}>Subject</label>
@@ -269,7 +282,7 @@ const Contactus = () => {
               type="submit"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="bg-amber-500 hover:bg-amber-600 text-white font-semibold py-3 rounded-lg transition duration-300"
+              className="bg-amber-500 hover:bg-amber-600 text-white font-semibold py-3 rounded-lg transition duration-300 cursor-pointer"
             >
               Send Message
             </motion.button>
@@ -294,10 +307,6 @@ const Contactus = () => {
             </div>
 
             {[
-              {
-                icon: <FaPhone className="text-amber-500" size={20} />,
-                label: "Phone",
-              },
               {
                 icon: <FaEnvelope className="text-amber-500" size={20} />,
                 label: "Email",
